@@ -21,10 +21,13 @@
     apt:
       name: jenkins
       state: present
-      update_cache: yes
 
-  - name: Ensure Jenkins is started and enabled
+  - name: Start Jenkins service
     service:
       name: jenkins
       state: started
+      
+  - name: Ensure Jenkins is enabled on boot
+    service:
+      name: jenkins
       enabled: yes
