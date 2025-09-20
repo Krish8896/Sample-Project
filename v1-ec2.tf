@@ -14,8 +14,8 @@ provider "aws" {
 resource "aws_instance" "demo-server" {
   ami           = "ami-0a716d3f3b16d290c" # Amazon Linux 2 AMI (HVM), SSD Volume Type
   instance_type = "t3.micro"
-    key_name      = "terraform_key" # Replace with your actual key pair name
-    security_groups = [ "demo-aws_security_group" ]
+  key_name      = "terraform_key" # Replace with your actual key pair name
+  security_groups = [ "demo-aws_security_group" ]
 
   tags = {
     Name = "terraform-demo-server"
