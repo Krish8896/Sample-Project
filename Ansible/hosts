@@ -1,12 +1,12 @@
 [jenkins-master]
-10.1.1.29
+10.1.1.137
 
 [jenkins-master:vars]
 ansible_user=ubuntu
 ansible_ssh_private_key_file=/opt/terraform_key.pem
 
 [jenkins-slave]
-10.1.1.76
+10.1.1.31
 
 [jenkins-slave:vars]
 ansible_user=ubuntu
