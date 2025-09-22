@@ -1,4 +1,4 @@
-terraform {
+ terraform {
   required_providers {
     aws = {
       source  = "hashicorp/aws"
@@ -13,7 +13,7 @@ provider "aws" {
 
 resource "aws_instance" "demo-server" {
   ami           = "ami-0a716d3f3b16d290c" # Amazon Linux 2 AMI (HVM), SSD Volume Type
-  instance_type = "t3.micro"
+  instance_type = "c7i-flex.large"
   key_name      = "terraform_key" # Replace with your actual key pair name
   # security_groups = [ "demo-aws_security_group" ]
   vpc_security_group_ids = [aws_security_group.demo-aws_security_group.id]
@@ -40,6 +40,14 @@ resource "aws_vpc_security_group_ingress_rule" "allow_incoming" {
   from_port         = 22
   ip_protocol       = "tcp"
   to_port           = 22
+}
+
+resource "aws_vpc_security_group_ingress_rule" "jenkins-port" {
+  security_group_id = aws_security_group.demo-aws_security_group.id
+  cidr_ipv4         = "0.0.0.0/0"
+  from_port         = 8080
+  ip_protocol       = "tcp"
+  to_port           = 8080
 }
 
 resource "aws_vpc_security_group_egress_rule" "allow_all_traffic_ipv4" {
