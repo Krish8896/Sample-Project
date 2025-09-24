@@ -120,12 +120,12 @@ resource "aws_route_table_association" "rt-assoc-public-subnet-02" {
   
 module "sgs" {
     source = "../sg_eks"
-    vpc_id     =     aws_vpc.my-vpc.id
+    vpc_id =  aws_vpc.my-vpc.id
  }
 
 module "eks" {
        source = "../eks"
-       vpc_id     =     aws_vpc.my-vpc.id
+       vpc_id = aws_vpc.my-vpc.id
        subnet_ids = [aws_subnet.my-public-subnet-01.id,aws_subnet.my-public-subnet-02.id]
        sg_ids = module.sgs.security_group_public
  }
