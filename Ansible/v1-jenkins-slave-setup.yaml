@@ -1,0 +1,25 @@
+---
+- hosts: jenkins-slave
+  become: true
+  tasks:
+  - name: Update ubuntu repo and cache
+    apt:
+      update_cache: yes
+      force_apt_get: yes
+      cache_valid_time: 3600
+
+  - name: Install Java 
+    apt:
+      name: openjdk-17-jdk
+      state: present
+
+  - name: Download maven package
+    get_url:
+      url: https://archive.apache.org/dist/maven/maven-3/3.9.4/binaries/apache-maven-3.9.4-bin.tar.gz
+      dest: /opt
+
+  - name: Extract maven package
+    unarchive:
+      src: /opt/apache-maven-3.9.4-bin.tar.gz
+      dest: /opt
+      remote_src: yes
